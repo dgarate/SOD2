@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @co_user_role_cycle.company_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @co_user_role_cycle.user_id %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @co_user_role_cycle.role_id %>
+</p>
+
+<p>
+  <strong>Cycle:</strong>
+  <%= @co_user_role_cycle.cycle_id %>
+</p>
+
+<%= link_to 'Edit', edit_co_user_role_cycle_path(@co_user_role_cycle) %> |
+<%= link_to 'Back', co_user_role_cycles_path %>

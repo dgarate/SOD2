@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Co User Role Cycles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>User</th>
+      <th>Role</th>
+      <th>Cycle</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @co_user_role_cycles.each do |co_user_role_cycle| %>
+      <tr>
+        <td><%= co_user_role_cycle.company_id %></td>
+        <td><%= co_user_role_cycle.user_id %></td>
+        <td><%= co_user_role_cycle.role_id %></td>
+        <td><%= co_user_role_cycle.cycle_id %></td>
+        <td><%= link_to 'Show', co_user_role_cycle %></td>
+        <td><%= link_to 'Edit', edit_co_user_role_cycle_path(co_user_role_cycle) %></td>
+        <td><%= link_to 'Destroy', co_user_role_cycle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Co User Role Cycle', new_co_user_role_cycle_path %>
