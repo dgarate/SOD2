@@ -1,0 +1,32 @@
+<%= form_with(model: co_cycle_resp, local: true) do |form| %>
+  <% if co_cycle_resp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(co_cycle_resp.errors.count, "error") %> prohibited this co_cycle_resp from being saved:</h2>
+
+      <ul>
+        <% co_cycle_resp.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company_id %>
+    <%= form.text_field :company_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cycle_id %>
+    <%= form.text_field :cycle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :responsibility_id %>
+    <%= form.text_field :responsibility_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

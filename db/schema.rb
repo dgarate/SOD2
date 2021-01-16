@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_023833) do
+ActiveRecord::Schema.define(version: 2021_01_16_004644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "co_cycle_resps", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "cycle_id", null: false
+    t.bigint "responsibility_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_co_cycle_resps_on_company_id"
+    t.index ["cycle_id"], name: "index_co_cycle_resps_on_cycle_id"
+    t.index ["responsibility_id"], name: "index_co_cycle_resps_on_responsibility_id"
+  end
 
   create_table "co_user_role_cycles", force: :cascade do |t|
     t.bigint "company_id", null: false
@@ -35,9 +46,39 @@ ActiveRecord::Schema.define(version: 2021_01_13_023833) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "conflicts", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "cycle_id", null: false
+    t.bigint "responsibility_id", null: false
+    t.bigint "control_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_conflicts_on_company_id"
+    t.index ["control_id"], name: "index_conflicts_on_control_id"
+    t.index ["cycle_id"], name: "index_conflicts_on_cycle_id"
+    t.index ["responsibility_id"], name: "index_conflicts_on_responsibility_id"
+  end
+
+  create_table "controls", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "cycles", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "responsibilities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "resp_type"
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -58,8 +99,15 @@ ActiveRecord::Schema.define(version: 2021_01_13_023833) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "co_cycle_resps", "companies"
+  add_foreign_key "co_cycle_resps", "cycles"
+  add_foreign_key "co_cycle_resps", "responsibilities"
   add_foreign_key "co_user_role_cycles", "companies"
   add_foreign_key "co_user_role_cycles", "cycles"
   add_foreign_key "co_user_role_cycles", "roles"
   add_foreign_key "co_user_role_cycles", "users"
+  add_foreign_key "conflicts", "companies"
+  add_foreign_key "conflicts", "controls"
+  add_foreign_key "conflicts", "cycles"
+  add_foreign_key "conflicts", "responsibilities"
 end

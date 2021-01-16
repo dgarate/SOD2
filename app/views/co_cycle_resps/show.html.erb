@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @co_cycle_resp.company_id %>
+</p>
+
+<p>
+  <strong>Cycle:</strong>
+  <%= @co_cycle_resp.cycle_id %>
+</p>
+
+<p>
+  <strong>Responsibility:</strong>
+  <%= @co_cycle_resp.responsibility_id %>
+</p>
+
+<%= link_to 'Edit', edit_co_cycle_resp_path(@co_cycle_resp) %> |
+<%= link_to 'Back', co_cycle_resps_path %>

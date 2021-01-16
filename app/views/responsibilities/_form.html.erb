@@ -1,0 +1,59 @@
+<%= form_with(model: responsibility, local: true) do |form| %>
+  <% if responsibility.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(responsibility.errors.count, "error") %> prohibited this responsibility from being saved:</h2>
+
+      <ul>
+        <% responsibility.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resp_type %>
+    <%= form.text_field :resp_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date %>
+  </div>
+
+<div class="field">
+    <%= form.label :companies %>
+    <%= form.collection_check_boxes(:company_ids, Company.all, :id ,:name) do |b| %>
+      <%= b.label class:"label-checkbox" do %>
+        <%= b.check_box + b.text%>
+        
+      <% end %>
+    <% end %>
+  </div>
+
+  
+  <div class="field">
+    <%= form.label :cycles %>
+    <%= form.collection_check_boxes(:cycle_ids, ::Cycle.all, :id ,:name) do |b| %>
+      <%= b.label class:"label-checkbox" do %>
+        <%= b.check_box + b.text%>
+        
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

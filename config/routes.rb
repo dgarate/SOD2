@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :conflicts
+  resources :controls
+  resources :co_cycle_resps
+  resources :responsibilities
   resources :co_user_role_cycles
   resources :cycles
   resources :roles

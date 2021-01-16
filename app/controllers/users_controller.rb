@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  include ActionView::Helpers::TextHelper
-  include ActionView::Helpers::TagHelper
-  include ApplicationHelper 
+ 
 
   # GET /users
   # GET /users.json
@@ -31,10 +29,10 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.save
-        user_params[:company_ids].reject(&:empty?).each_with_index do |id, index|
+        user_params[:cycle_ids].reject(&:empty?).each_with_index do |id, index|
           role_id = user_params[:role_ids].reject(&:empty?)
-          cycle_id = user_params[:cycle_ids].reject(&:empty?)
-        CoUserRoleCycle.create(user_id: @user.id, company_id: id, role_id: role_id[index], cycle_id: cycle_id[index])
+          company_id = user_params[:company_ids].reject(&:empty?)
+          CoUserRoleCycle.create(user_id: @user.id, cycle_id: id, role_id: role_id[index], company_id: company_id[index])
       end
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
@@ -49,7 +47,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(name: user_params[:name], email: user_params[:email], end_date: user_params[:end_date])
+        user_params[:cycle_ids].reject(&:empty?).each_with_index do |id, index|
+          role_id = user_params[:role_ids].reject(&:empty?)
+          company_id = user_params[:company_ids].reject(&:empty?)
+          CoUserRoleCycle.where( user_id: @user.id).destroy_all
+          CoUserRoleCycle.create(user_id: @user.id, cycle_id: id, role_id: role_id[index], company_id: company_id[index])
+      end
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

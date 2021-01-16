@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Co Cycle Resps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Cycle</th>
+      <th>Responsibility</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @co_cycle_resps.each do |co_cycle_resp| %>
+      <tr>
+        <td><%= co_cycle_resp.company_id %></td>
+        <td><%= co_cycle_resp.cycle_id %></td>
+        <td><%= co_cycle_resp.responsibility_id %></td>
+        <td><%= link_to 'Show', co_cycle_resp %></td>
+        <td><%= link_to 'Edit', edit_co_cycle_resp_path(co_cycle_resp) %></td>
+        <td><%= link_to 'Destroy', co_cycle_resp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Co Cycle Resp', new_co_cycle_resp_path %>

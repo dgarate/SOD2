@@ -1,13 +1,10 @@
 class CyclesController < ApplicationController
   before_action :set_cycle, only: [:show, :edit, :update, :destroy]
-  include ActionView::Helpers::TextHelper
-  include ActionView::Helpers::TagHelper
-  include ApplicationHelper 
-
+  
   # GET /cycles
   # GET /cycles.json
   def index
-    @cycles = Cycle.all
+    @cycles = ::Cycle.all
   end
 
   # GET /cycles/1
@@ -17,7 +14,7 @@ class CyclesController < ApplicationController
 
   # GET /cycles/new
   def new
-    @cycle = Cycle.new
+    @cycle = ::Cycle.new
   end
 
   # GET /cycles/1/edit
@@ -27,7 +24,7 @@ class CyclesController < ApplicationController
   # POST /cycles
   # POST /cycles.json
   def create
-    @cycle = Cycle.new(cycle_params)
+    @cycle = ::Cycle.new(cycle_params)
 
     respond_to do |format|
       if @cycle.save
@@ -67,7 +64,7 @@ class CyclesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cycle
-      @cycle = Cycle.find(params[:id])
+      @cycle = ::Cycle.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
