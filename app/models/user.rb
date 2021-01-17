@@ -11,4 +11,11 @@ class User < ApplicationRecord
     
     validates :name, presence: true
     validates :email, presence: true
+
+    belongs_to :role, optional: true
+
+    def assign_role
+      self.role = Role.find_by name: 'VIEWER' if role.nil?
+    end
+
 end
