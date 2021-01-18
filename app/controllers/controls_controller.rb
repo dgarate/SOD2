@@ -1,5 +1,6 @@
 class ControlsController < ApplicationController
   before_action :set_control, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, :only => [:index]
 
   # GET /controls
   # GET /controls.json

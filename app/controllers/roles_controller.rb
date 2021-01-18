@@ -5,11 +5,16 @@ class RolesController < ApplicationController
   # GET /roles.json
   def index
     @roles = Role.all
+    
   end
-
   # GET /roles/1
   # GET /roles/1.json
   def show
+    if @role.users.empty?
+      @assosciated_user = 'None'
+    else
+      @assosciated_users = @role.users.map(&:name).join(', ')
+    end
   end
 
   # GET /roles/new
